@@ -1,0 +1,19 @@
+<div class="container-fluid">
+  <h3 style="margin-left:15px">The top 3 Vote</h3>
+ 
+  <div *ngIf="!catservice.voteresults"> Loading...</div>
+  <div *ngIf="catservice.voteresults">
+    <div id="cat-list" class="col-12 no-padding no-margin" style="height: 100%; overflow-y: hidden !important; padding: 7px 0 0 7px !important;">
+
+      <div class="row col-10" *ngFor="let voteresult of catservice.voteresults">
+
+        <div class="col-6">
+          <img [src]="voteresult.cat.url" style="width: 100px; height: 100px; padding-bottom: 2px;object-fit: cover;" />
+        </div>
+        <div class="col-6">Number of votes : {{voteresult.vote}}</div>
+       
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+<div class="container-fluid">
+<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+    <div class="container">
+    
+      <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse"
+           [ngClass]="{ show: isExpanded }">
+        <ul class="navbar-nav flex-grow">
+          <li class="nav-item"
+              [routerLinkActive]="['link-active']"
+              [routerLinkActiveOptions]="{ exact: true }">
+            <a class="nav-link text-dark" [routerLink]="['/fetch-data']">Vote result</a>
+          </li>
+
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div *ngIf="!catservice.forecasts"> Loading...</div>
+  <div *ngIf="catservice.forecasts">
+    <div id="cat-list" class="col-12 no-padding no-margin" style="height: 100%; overflow-y: hidden !important; padding: 7px 0 0 7px !important;">
+
+      <div class="row col-10" *ngFor="let cat of catservice.forecasts | paginate: { itemsPerPage: 4, currentPage: p }; let i = index">
+        <div class="col-6">
+          <img [src]="cat.url" style="width: 100px; height: 100px; padding-bottom: 2px;object-fit: cover;"  />
+        </div>
+        <div class="col-4">  <button mat-icon-button (click)="chooseCat(cat)"><mat-icon [ngStyle]="{'color':cat.coloricon}">favorite</mat-icon></button></div>
+      </div>
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </div>
+  </div>
+</div>
